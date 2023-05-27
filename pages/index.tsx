@@ -1,7 +1,12 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
+import { useState } from "react";
 
 export default function Home() {
+  const [animalInput, setAnimalInput] = useState("");
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAnimalInput(e.target.value);
+  };
   return (
     <>
       <div>
@@ -13,7 +18,13 @@ export default function Home() {
           <img src="/favicon.ico" alt="favicon" />
           <h3>애완동물 이름 짓기</h3>
           <form>
-            <input type="text" name="animal" placeholder="Enter an animal" />
+            <input
+              type="text"
+              name="animal"
+              placeholder="Enter an animal"
+              value={animalInput}
+              onChange={onChangeHandler}
+            />
             <input type="submit" />
           </form>
         </main>
