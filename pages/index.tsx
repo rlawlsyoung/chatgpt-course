@@ -17,7 +17,13 @@ export default function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ animal: animalInput }),
-    });
+    })
+      .then((res) => res.json())
+      .then((data) => {})
+      .catch((err) => {
+        alert(err);
+        throw err || new Error("Error");
+      });
 
     setAnimalInput("");
   };
