@@ -7,6 +7,20 @@ export default function Home() {
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAnimalInput(e.target.value);
   };
+
+  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    fetch("/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ animal: animalInput }),
+    });
+
+    setAnimalInput("");
+  };
   return (
     <>
       <div>
@@ -17,15 +31,15 @@ export default function Home() {
         <main>
           <img src="/favicon.ico" alt="favicon" />
           <h3>애완동물 이름 짓기</h3>
-          <form>
+          <form onSubmit={onSubmitHandler}>
             <input
               type="text"
               name="animal"
-              placeholder="Enter an animal"
+              placeholder="애완동물 종류를 입력해주세요."
               value={animalInput}
               onChange={onChangeHandler}
             />
-            <input type="submit" />
+            <input type="submit" value="이름 생성하기" />
           </form>
         </main>
       </div>
